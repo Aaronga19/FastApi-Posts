@@ -5,7 +5,11 @@ INSERT INTO posts (title, content, published) VALUES ('From SQL SENTENCE', 'FROM
 INSERT INTO users (email, password) VALUES ('arcan_diabdo@hotmail.com', 'Micontraseña1234') RETURNING *;
 */
 
-SELECT * FROM posts;
+SELECT * FROM users;
 
 /* DELETE TABLE */
 /*DROP TABLE users;*/
+
+/* delete rows from the table
+DELETE FROM users;
+*/

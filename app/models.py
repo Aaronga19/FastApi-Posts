@@ -1,5 +1,5 @@
 from sqlalchemy.sql.sqltypes import TIMESTAMP, Boolean, Integer, String
-from sqlalchemy.sql.expression import text
+from sqlalchemy.sql.expression import null, text
 from app.database import Base
 from sqlalchemy import Column
 
@@ -21,4 +21,4 @@ class User(Base):
     email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
-    premium = Column(Boolean, server_default="false")
+    premium = Column(Boolean, nullable=False)
