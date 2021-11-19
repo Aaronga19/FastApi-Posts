@@ -3,6 +3,7 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional
 
 from app.database import Base
+from app.models import User
 # To validate the 
 
 
@@ -16,9 +17,20 @@ class PostBase(BaseModel):
 class PostCreate(PostBase):
     pass
 
+class UserOut(BaseModel):
+    id: int
+    email: EmailStr
+    premium: bool
+    created_at: datetime
+
+    class Config:
+        orm_mode = True
+
 class Post(PostBase):
     id: int
     created_at: datetime
+    owner_id: int
+    owner: UserOut
 
     class Config:
         orm_mode = True
@@ -28,14 +40,6 @@ class UserCreate(BaseModel):
     password: str
     premium: bool = False
 
-class UserOut(BaseModel):
-    id: int
-    email: EmailStr
-    premium: bool
-    created_at: datetime
-
-    class Config:
-        orm_mode = True
 
 class UserLogin(BaseModel):
     email: EmailStr

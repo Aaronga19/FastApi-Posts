@@ -4,7 +4,7 @@ from fastapi.routing import APIRouter
 from sqlalchemy.orm import Session
 
 from app import oauth2
-from .. import models, schemas, utils
+from .. import models, schemas
 from ..database import get_db
 from typing import Optional, List
 
@@ -17,14 +17,14 @@ router = APIRouter(
 # API
 
 @router.get("/", response_model=List[schemas.Post])
-def get_posts(db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
+def get_posts(db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user), limit: int = 10, skip: int= 0, search: Optional[str]= ""):
     # SQL 
     """cursor.execute('''SELECT * FROM posts''')
     posts = cursor.fetchall()"""
     # ORM
-    print(f"Requested by '{current_user.id}' - {current_user.email}")
-    posts = db.query(models.Post).all()
-
+    print(f"Request by '{current_user.id}' - {current_user.email}")
+    # to filter by user _ posts = db.query(models.Post).filter(models.Post.owner_id == current_user.id).all()
+    posts = db.query(models.Post).filter(models.Post.title.contains(search)).limit(limit).offset(skip).all()
     return posts
 
 
@@ -41,8 +41,9 @@ def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db), curren
     my_posts.append(post_dict)"""
 
     # ORM
-    print(current_user)
-    new_post = models.Post(**post.dict()) # Post(**Post.dict()) instead of Post(title=post.title, content=post.content... so on) 
+    
+    print(f"Request by '{current_user.id}' - {current_user.email}")
+    new_post = models.Post(owner_id=current_user.id,**post.dict()) # Post(**Post.dict()) instead of Post(title=post.title, content=post.content... so on) 
     db.add(new_post)
     db.commit()
     db.refresh(new_post)
@@ -68,6 +69,7 @@ async def get_post(id: int, db: Session = Depends(get_db), current_user: int = D
     #post = find_post(id)
     if post != None:
         return post
+
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id {id} does not exist")
         
@@ -85,12 +87,18 @@ def delete_post(id: int,db: Session = Depends(get_db), current_user: int = Depen
     # ORM
     post = db.query(models.Post).filter(models.Post.id == id).first()
 
+    #post = post_query
+
     #find the index in the array that has required id 
     
     #index =  find_index_post(id)
     
     if post == None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id: {id} does not exist!")
+    
+    if post.owner_id != current_user.id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action")
+    
     else:
         db.delete(post)
         db.commit()
@@ -114,6 +122,9 @@ def update_post(id: int, api_post: schemas.PostCreate, db: Session = Depends(get
 
     if post == None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id: {id} does not exist!")
+    
+    if post.owner_id != current_user.id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action")
 
     post_query.update(api_post.dict(), synchronize_session=False)
     #post_query.update({"title":f"{post.title}","content":f"{post.content}"}, synchronize_session=False)
