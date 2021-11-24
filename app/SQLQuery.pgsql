@@ -1,11 +1,11 @@
 
-
-INSERT INTO posts (title, content, published, owner_id) VALUES ('From SQL SENTENCE', 'FROM SQL SENTENCE IN A SCRIPT', false, 1) RETURNING *;
 /*
+INSERT INTO posts (title, content, published, owner_id) VALUES ('From SQL SENTENCE', 'FROM SQL SENTENCE IN A SCRIPT', false, 1) RETURNING *;
+
 INSERT INTO users (email, password) VALUES ('arcan_diabdo@hotmail.com', 'Micontraseña1234') RETURNING *;
 */
 
-SELECT * FROM users;
+SELECT * FROM votes;
 
 /* DELETE TABLE */
 /*DROP TABLE posts;*/

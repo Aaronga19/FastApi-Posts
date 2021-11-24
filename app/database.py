@@ -6,6 +6,9 @@ from psycopg2.extras import RealDictCursor
 import json
 import psycopg2
 import time
+# con variables de entorno
+# from config import settings
+# host = settings.database_hostname #so on
 
 #
 with open("secret.json") as f:
@@ -42,7 +45,7 @@ def get_db():
     finally:
         db.close()
 
-# Conect database without ORM SQL only
+# Conect database without ORM - SQL only
 
 # def connect_database(host, database, user, password):
 #     while True:
