@@ -1,7 +1,7 @@
 
 
 from fastapi import FastAPI
-
+from fastapi.middleware.cors import CORSMiddleware
 from app import database
 
 from .routers import post, user, auth, vote
@@ -16,6 +16,15 @@ import uvicorn
 
 app = FastAPI()
 
+origins = ["https://www.google.com.mx"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins= origins,
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
 #models.Base.metadata.create_all(bind=engine)
 
 # ROUTERS
