@@ -16,7 +16,7 @@ import uvicorn
 
 app = FastAPI()
 
-models.Base.metadata.create_all(bind=engine)
+#models.Base.metadata.create_all(bind=engine)
 
 # ROUTERS
 app.include_router(post.router)

@@ -5,3 +5,7 @@ taste.py
 
 secret.json
 .env
+
+# Alembic
+
+alembic
