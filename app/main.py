@@ -16,7 +16,7 @@ import uvicorn
 
 app = FastAPI()
 
-origins = ["https://www.google.com.mx"]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,

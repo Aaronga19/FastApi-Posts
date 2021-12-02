@@ -28,6 +28,7 @@ password = get_secret('password')
 
 SQLALCHEMY_DATABASE_URL = f'postgresql://{user}:{password}@{host}/{database}'
 
+#{settings.database_url}
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 print('\nDatabase connection was succesfull!\n')
