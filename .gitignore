@@ -3,9 +3,8 @@ taste.py
 
 # Confidential
 
-secret.json
+#secret.json
 .env
 
 # Alembic
 
-alembic
