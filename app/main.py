@@ -16,7 +16,7 @@ import uvicorn
 
 app = FastAPI()
 
-origins = ["https://www.google.com.mx"]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -35,7 +35,7 @@ app.include_router(vote.router)
 
 @app.get("/")
 async def get_user():
-    return {"message": "Welcome to my API"}
+    return {"message": "Welcome to my API - Aaron J."}
 
 if __name__=='__main__':
     uvicorn.run(app)

@@ -2,10 +2,9 @@
 taste.py
 
 # Confidential
-
-secret.json
+docker-compose-dev.yml
+secret*
 .env
 
 # Alembic
 
-alembic
