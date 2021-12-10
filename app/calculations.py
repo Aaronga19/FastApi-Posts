@@ -1,6 +1,8 @@
 def add(num1: int, num2:2):
     return num1 + num2
 
+class InsufficientFunds(Exception):
+    pass 
 
 class BankAccount():
     def __init__(self, starting_balance=0):
@@ -10,6 +12,8 @@ class BankAccount():
         self.balance += amount
 
     def withdraw(self, amount):
+        if amount > self.balance:
+            raise InsufficientFunds("Insufucient funs in account")
         self.balance -= amount
     
     def collect_interest(self):

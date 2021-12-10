@@ -3,7 +3,7 @@ taste.py
 
 # Confidential
 docker-compose-dev.yml
-secret*
+*secret*
 .env
 
 # Alembic

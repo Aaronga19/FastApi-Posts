@@ -1,6 +1,6 @@
 from _pytest.recwarn import T
 import pytest
-from app.calculations import add, BankAccount
+from app.calculations import add, BankAccount, InsufficientFunds
 
 
 @pytest.fixture
@@ -56,3 +56,7 @@ def test_bank_transaction(zero_bank_account, deposited, withdraw, expected):
     zero_bank_account.deposit(deposited)
     zero_bank_account.withdraw(withdraw)
     assert zero_bank_account.balance == expected
+
+def test_insuficient_funds(bank_account):
+    with pytest.raises(InsufficientFunds):
+        bank_account.withdraw(200)

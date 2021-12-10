@@ -33,8 +33,8 @@ app.include_router(user.router)
 app.include_router(auth.router)
 app.include_router(vote.router)
 
-@app.get("/")
-async def get_user():
+@app.get("/", status_code=200) 
+async def get_user(): 
     return {"message": "Welcome to my API - Aaron J."}
 
 if __name__=='__main__':
