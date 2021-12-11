@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from app.settings import secret
 
 from psycopg2.extras import RealDictCursor
 import json
@@ -10,21 +11,13 @@ import time
 # from config import settings
 # host = settings.database_hostname #so on
 
-#
-with open("secret.json") as f:
-    secret = json.loads(f.read())
 
-def get_secret(secret_name, secrets=secret):
-    try:
-        return secrets[secret_name]
-    except:
-        msg = "la variable %s no existe" % secret_name
-        raise (msg)
 
-host = get_secret('host')
-database = get_secret('database')
-user = get_secret('user')
-password = get_secret('password')
+# Confidential info 
+host = secret.host
+database = secret.database
+user = secret.user
+password = secret.password
 
 SQLALCHEMY_DATABASE_URL = f'postgresql://{user}:{password}@{host}/{database}'
 
