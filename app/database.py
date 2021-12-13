@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from app.settings import secret
+
 
 from psycopg2.extras import RealDictCursor
 import json
@@ -13,13 +13,20 @@ import time
 
 
 
-# Confidential info 
-host = secret.host
-database = secret.database
-user = secret.user
-password = secret.password
+# Confidential info DEVELOPING
+# from app.settings import secret
+# host = secret.host
+# database = secret.database
+# user = secret.user
+# password = secret.password
 
-SQLALCHEMY_DATABASE_URL = f'postgresql://{user}:{password}@{host}/{database}'
+# SQLALCHEMY_DATABASE_URL = f'postgresql://{user}:{password}@{host}/{database}'
+
+# CONFIDENTIAL INFO DEPLOYING 
+from app.config import settings
+
+SQLALCHEMY_DATABASE_URL = f'postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}'#{settings.database_url}
+
 
 #{settings.database_url}
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
