@@ -12,6 +12,8 @@ jobs:
       DATABAsE_USERNAME: postgres
       SECRET_KEY: 89498gGD984Hn5gngNFNGFS4556fDGBHHERH54nfgDHJ879DHJe7EY7
       ALGORITHM: HS256  
+      ACCESS_TOKEN_EXPIRE_MINUTES: 30
+
     runs-on: ubuntu-latest
     steps:
       - name: Pulling git repo
