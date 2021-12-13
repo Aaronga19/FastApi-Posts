@@ -1,9 +1,8 @@
 from app import schemas
 from jose import jwt
-from app.settings import secret
 import pytest
 
-
+from app.config import settings
 
 
 def test_root(client):
@@ -30,7 +29,7 @@ def test_login_user(test_user, client):
         'password': test_user['password'] 
         })
     login_res = schemas.Token(**res.json())
-    payload = jwt.decode(login_res.access_token, secret.SECRET_KEY, algorithms=[secret.ALGORITHM])
+    payload = jwt.decode(login_res.access_token, settings.secret_key, algorithms=[settings.algorithm])
     id: str = payload.get('user_id')
     assert id == test_user['id']
     assert login_res.token_type == 'bearer'

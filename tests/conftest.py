@@ -23,6 +23,7 @@ from app.config import settings
 #SQLALCHEMY_DATABASE_URL = f'postgresql://postgres:password123@localhost/fastapi_test'
 
 #SQLALCHEMY_DATABASE_URL = f'postgresql://{user}:{password}@{host}/{database}_test'    
+
 # For deployig
 
 SQLALCHEMY_DATABASE_URL = f'postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}_test'#{settings.database_url}
