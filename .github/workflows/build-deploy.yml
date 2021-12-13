@@ -8,12 +8,11 @@ jobs:
     steps:
       - name: Pulling git repo
         uses: actions/checkout@v2 
-      - name: Say hi to Aaron 
-        run: echo "Hello Aaron"
-  # push:
-  #   branches:
-  #     - 'main'
-  #     - 'another_branch'
-  #   pull_request:
-  #     branches:
-  #       - 'test_branch'
+      - name: Installing python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+      - name: Update pip
+        run: python -m pip install --upgrade pip
+      - name: Installing dependencies
+        run: pip install -r requirements.txt
