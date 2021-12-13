@@ -5,12 +5,13 @@ on: [push, pull_request]
 jobs:
   jobFastAPI:
     env:
-      host: localhost
-      password: Colesman1
-      name: fastapi
-      username: postgres
+      DATABASE_HOSTNAME: localhost
+      DATABASE_PORT: 5432
+      DATABASE_PASSWORD: Colesman1<
+      DATABASE_NAME: fastapi
+      DATABAsE_USERNAME: postgres
       SECRET_KEY: 89498gGD984Hn5gngNFNGFS4556fDGBHHERH54nfgDHJ879DHJe7EY7
-      ALGORITHM: HS256
+      ALGORITHM: HS256  
     runs-on: ubuntu-latest
     steps:
       - name: Pulling git repo
