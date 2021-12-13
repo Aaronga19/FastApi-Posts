@@ -17,5 +17,7 @@ class Secret():
         self.database = get_secret('database')
         self.user = get_secret('user')
         self.password = get_secret('password')
+        self.SECRET_KEY = get_secret('SECRET_KEY')
+        self.ALGORITHM = get_secret('ALGORITHM')
                 
 secret = Secret()

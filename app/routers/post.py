@@ -107,7 +107,7 @@ def delete_post(id: int,db: Session = Depends(get_db), current_user: int = Depen
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id: {id} does not exist!")
     
     if post.owner_id != current_user.id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Not authorized to perform requested action")
     
     else:
         db.delete(post)
@@ -134,7 +134,7 @@ def update_post(id: int, api_post: schemas.PostCreate, db: Session = Depends(get
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id: {id} does not exist!")
     
     if post.owner_id != current_user.id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Not authorized to perform requested action")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Not authorized to perform requested action")
 
     post_query.update(api_post.dict(), synchronize_session=False)
     #post_query.update({"title":f"{post.title}","content":f"{post.content}"}, synchronize_session=False)

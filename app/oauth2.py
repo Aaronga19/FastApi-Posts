@@ -4,21 +4,7 @@ from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from . import schemas, database, models
 from sqlalchemy.orm import Session
-import json
-
-
-
-# GET CONFIDENTIAL
-with open("secret.json") as f:
-    secret = json.loads(f.read())
-
-def get_secret(secret_name, secrets=secret):
-    try:
-        return secrets[secret_name]
-    except:
-        msg = "la variable %s no existe" % secret_name
-        raise (msg)
-
+from app.settings import secret
 
 # SECRET_KEY
 # Algotithm
@@ -26,8 +12,8 @@ def get_secret(secret_name, secrets=secret):
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/login')
 
-SECRET_KEY = get_secret('SECRET_KEY')
-ALGORITHM = "HS256"
+SECRET_KEY = secret.SECRET_KEY
+ALGORITHM = secret.ALGORITHM
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 def create_access_token(data: dict):
