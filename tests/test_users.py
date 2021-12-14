@@ -8,7 +8,7 @@ from app.config import settings
 def test_root(client):
     res = client.get("/")
     print(res.json().get('message'), "|status:", res.status_code)
-    assert res.json().get('message') == 'Welcome to my API - Aaron J. Successfully deploy from CI/CD pipeline'
+    assert res.json().get('message') == 'Welcome to my API - Aaron J.'
     assert res.status_code == 200
 
 def test_create_user(client):
