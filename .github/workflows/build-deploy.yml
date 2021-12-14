@@ -95,7 +95,7 @@ jobs:
                             # git push heroku main 
 
 # Ubuntu Deployment
-vpsDeploy:
+#vpsDeploy:
 # login to our ubuntu
 # cd /app/src
 # git pull
