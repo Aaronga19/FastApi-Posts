@@ -35,7 +35,7 @@ app.include_router(vote.router)
 
 @app.get("/", status_code=200) 
 async def get_user(): 
-    return {"message": "Welcome to my API - Aaron J.", "CI/CD": "Successfully deploy from pipeline"}
+    return {"message": "Welcome to my API - Aaron J. Acosta", "CI/CD": "Successfully deploy from pipeline"}
 
 if __name__=='__main__':
     uvicorn.run(app)
